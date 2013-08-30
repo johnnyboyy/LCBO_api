@@ -18,7 +18,7 @@ attr_accessor :products, :attributes
 		@html = HtmlView.new
 
 	end
-	
+
 	def get_pictures
 		pictures = attribute_by_id("image_url")
 	end
@@ -56,14 +56,14 @@ attr_accessor :products, :attributes
 	end
 
 	def show(product_id)
-		@products.each do |products|
-			results = products.select { |k, v| k == product_id }
-			if results.empty?
-				return "No products matched the id: #{product_id}"
-			else
-				return results.values
-			end
-		end
+		# @products.each do |products|
+		# 	results = products.select { |k, v| k == product_id }
+		# 	if results.empty?
+		# 		return "No products matched the id: #{product_id}"
+		# 	else
+		# 		return results.values
+		# 	end
+		# end
 	end 
 
 	def refresh

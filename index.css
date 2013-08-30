@@ -41,3 +41,9 @@ span {
 	padding-left: 5px;
 	font-size: 14px;
 }
+
+li:hover {
+	background: #aeb32f;
+	text-decoration: underline;
+	color: white;
+}
