@@ -1,28 +1,29 @@
 body {
-	background: #1baabe;
+	background: #a8a8a8;
 }
 
 img {
-	height: 200px;
-	width: 200px;
+	height: 194px;
+	width: 194px;
 	display: inline;
+	margin: 5px 5px;
 }
 
 ol {
-	width: 800px;
+	width: 900px;
 	margin: 0 auto;
 	padding: 0;
 }
 
 li {
 	float: left;
-	margin: 5px auto;
-	height: 300px;
-	background: #ab12ab;
+	margin: 5px 5px;
+	height: 350px;
+	background: #d1d1d1;
 }
 
 h2 {
-	width: 150px;
+	width: 200px;
 	font-size: 16px;
 	margin: 4px;
 	text-align: center;
@@ -31,8 +32,12 @@ span {
 	display: block;
 	padding: 2px 0px;
 	width: 200px;
+	padding-left: 5px;
+	font-size: 16px;
 }
 
 .cat {
 	width: 200px;
+	padding-left: 5px;
+	font-size: 14px;
 }

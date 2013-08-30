@@ -4,7 +4,7 @@ require './html_view'
 
 
 class HtmlGenerator
-attr_accessor :products, :attributes, :names, :pictures, :price_in_cents, :primary_category
+attr_accessor :products, :attributes
 
 	def initialize
 		raw_response = open("http://lcboapi.com/products").read
@@ -17,36 +17,39 @@ attr_accessor :products, :attributes, :names, :pictures, :price_in_cents, :prima
 
 		@html = HtmlView.new
 
+	end
+	
+	def get_pictures
+		pictures = attribute_by_id("image_url")
+	end
 
-		@names = attribute_by_id("name").values
-		@pictures = attribute_by_id("image_url").values
-		@pictures.each_with_index do |url, index|
+
+	def replace_empty_pictures(image_url_array)
+		image_url_array.each_with_index do |url, index|
 			if url == ""
-				@pictures[index] = "http://placekitten.com/150/150"
+				image_url_array[index] = "http://placekitten.com/150/150"
 			end
 		end
-		@price_in_cents = attribute_by_id("price_in_cents").values
-		@primary_category = attribute_by_id("primary_category").values
-		@amount = attribute_by_id("total_package_units").values
+		image_url_array
 	end
 
 	def index 
-		@html.generate_index_view(@names,
-								 @pictures,
-								 @price_in_cents,
-								 @primary_category,
-								 @amount
+		@html.generate_index_view(attribute_by_id("name"),
+								 replace_empty_pictures(get_pictures),
+								 attribute_by_id("price_in_cents"),
+								 attribute_by_id("primary_category"),
+								 attribute_by_id("total_package_units")
 								 )
 	end
 
 	def attribute_by_id(attribute)
 		if @attributes.include?(attribute)
-			attribute_and_id = {}
+			attribute_list = []
 
 			@products.each do |items|
-				attribute_and_id[items["id"]] = items[attribute].to_s
+				attribute_list << items[attribute].to_s
 			end
-			return attribute_and_id
+			return attribute_list
 		else
 			raise "No attribute with that name."
 		end
