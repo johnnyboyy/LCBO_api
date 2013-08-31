@@ -7,12 +7,17 @@ class HtmlGenerator
 attr_accessor :products, :attributes
 
 	def initialize
-		raw_response = open("http://lcboapi.com/products").read
-		#Parse JSON formatted text into a Ruby Hash 
-		parsed_response = JSON.parse(raw_response)
-		#Return the actual result data from the response, ignoring meta data 
+		@products = []
+		10.times do |n|
+			raw_response = open("http://lcboapi.com/products?page=#{n + 1}&per_page=100&order=id.asc").read
+			#Parse JSON formatted text into a Ruby Hash 
+			parsed_response = JSON.parse(raw_response)
+			#Return the actual result data from the response, ignoring meta data 
 
-		@products = parsed_response["result"]
+			parsed_response["result"].each do |prods|
+				@products << prods
+			end
+		end
 		@attributes = @products.first.keys
 
 		@html = HtmlView.new
