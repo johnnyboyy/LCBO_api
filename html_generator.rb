@@ -20,7 +20,7 @@ attr_accessor :products, :attributes
 	end
 
 	def get_pictures
-		pictures = attribute_by_id("image_url")
+		pictures = attribute_by_name("image_thumb_url")
 	end
 
 
@@ -33,16 +33,17 @@ attr_accessor :products, :attributes
 		image_url_array
 	end
 
-	def index 
-		@html.generate_index_view(attribute_by_id("name"),
+	def index
+		@html.generate_index_view(attribute_by_name("name"),
 								 replace_empty_pictures(get_pictures),
-								 attribute_by_id("price_in_cents"),
-								 attribute_by_id("primary_category"),
-								 attribute_by_id("total_package_units")
+								 attribute_by_name("price_in_cents"),
+								 attribute_by_name("primary_category"),
+								 attribute_by_name("total_package_units"),
+								 attribute_by_name("id")
 								 )
 	end
 
-	def attribute_by_id(attribute)
+	def attribute_by_name(attribute)
 		if @attributes.include?(attribute)
 			attribute_list = []
 
@@ -56,14 +57,22 @@ attr_accessor :products, :attributes
 	end
 
 	def show(product_id)
-		# @products.each do |products|
-		# 	results = products.select { |k, v| k == product_id }
-		# 	if results.empty?
-		# 		return "No products matched the id: #{product_id}"
-		# 	else
-		# 		return results.values
-		# 	end
-		# end
+		@products.each_with_index do |item, index|
+			if item["id"].to_s == product_id.to_s
+				prod = @products[index]
+				@html.generate_show_view(prod["name"].to_s,
+								 prod["image_url"],
+								 prod["price_in_cents"].to_s,
+								 prod["primary_category"].to_s,
+								 prod["package"].to_s,
+								 prod["id"].to_s,
+								 prod["producer_name"].to_s,
+								 prod["has_clearance_sale"].to_s,
+								)
+				return true
+			end
+		end
+		return false
 	end 
 
 	def refresh

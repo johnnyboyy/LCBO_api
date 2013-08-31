@@ -1,0 +1,46 @@
+body {
+	background: #a8a8a8;
+	margin-left: 30px;
+	font-size: 24px;
+	color: black;
+
+}
+
+img {
+	height: 500px;
+	width: 500px;
+	float: left;
+}
+
+h1 {
+	font-size: 46px;
+	color: white;
+}
+
+span {
+	display: block;
+	padding: 2px 0px;
+	width: 400px;
+	padding-left: 5px;
+	font-size: 28px;
+}
+
+.cat {
+	width: 400px;
+	padding-left: 5px;
+	font-size: 24px;
+}
+.cont {
+	height: 500px;
+	width: 500px;
+	float: left;
+	background: white;
+}
+
+.footer {
+	height: 0;
+	width: 0;
+	background: none;
+	display: block;
+	float: none;
+}
